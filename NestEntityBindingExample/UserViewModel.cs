@@ -2,7 +2,7 @@
 
 namespace NestEntityBindingExample
 {
-    public partial class UserWrapper : ObservableObject
+    public partial class UserViewModel : ObservableObject
     {
         private readonly User _inner;
         public int Id
@@ -23,14 +23,14 @@ namespace NestEntityBindingExample
             set => SetProperty(_inner.Description, value, _inner, (u, v) => u.Description = v);
         }
 
-        public UserWrapper(User user)
+        public UserViewModel(User user)
         {
             _inner = user;
         }
 
-        public static UserWrapper FromUser(User user)
+        public static UserViewModel FromUser(User user)
         {
-            return new UserWrapper(user);
+            return new UserViewModel(user);
         }
     }
 }

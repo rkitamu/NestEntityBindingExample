@@ -5,7 +5,7 @@ namespace NestEntityBindingExample
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        private UserWrapper _currentUser;
+        private UserViewModel _currentUser;
 
         public MainViewModel()
         {
@@ -16,7 +16,7 @@ namespace NestEntityBindingExample
                 Description = "He is a software engineer."
             };
 
-            _currentUser = new UserWrapper(userModel);
+            _currentUser = new UserViewModel(userModel);
         }
     }
 }
