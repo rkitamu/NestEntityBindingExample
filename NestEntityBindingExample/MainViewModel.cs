@@ -53,5 +53,19 @@ namespace NestEntityBindingExample
             );
             SelectedUser = Users.FirstOrDefault();
         }
+
+        [RelayCommand(CanExecute = nameof(CanDelete))]
+        private void Delete(UserViewModel? userToDelete)
+        {
+            if (userToDelete != null)
+            {
+                Users.Remove(userToDelete);
+            }
+        }
+
+        private bool CanDelete(UserViewModel? user)
+        {
+            return user != null;
+        }
     }
 }
