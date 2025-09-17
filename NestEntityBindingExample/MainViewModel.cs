@@ -67,5 +67,24 @@ namespace NestEntityBindingExample
         {
             return user != null;
         }
+
+        [RelayCommand]
+        private void AddUser()
+        {
+            int newId = (Users.Any() ? Users.Max(u => u.Id) : 100) + 1;
+
+            var newUser = new User
+            {
+                Id = newId,
+                Name = "New User",
+                Description = ""
+            };
+
+            var newUserViewModel = new UserViewModel(newUser);
+            Users.Add(newUserViewModel);
+
+            // To allow immediate editing of the newly added user
+            SelectedUser = newUserViewModel;
+        }
     }
 }
