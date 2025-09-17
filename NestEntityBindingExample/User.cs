@@ -39,5 +39,15 @@ namespace NestEntityBindingExample
                 Debug.WriteLine($"User.Description changed: '{oldValue}' -> '{_description}'");
             }
         }
+
+        public User Clone()
+        {
+            return new User
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Description = this.Description
+            };
+        }
     }
 }

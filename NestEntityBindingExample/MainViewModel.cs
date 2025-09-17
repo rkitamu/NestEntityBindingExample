@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -6,6 +7,8 @@ namespace NestEntityBindingExample
 {
     public partial class MainViewModel : ObservableObject
     {
+        private readonly List<User> _originalUsers;
+
         [ObservableProperty]
         private ObservableCollection<UserViewModel> _users;
 
@@ -14,7 +17,7 @@ namespace NestEntityBindingExample
 
         public MainViewModel()
         {
-            var userModels = new[]
+            _originalUsers = new List<User>
             {
                 new User
                 {
@@ -36,8 +39,19 @@ namespace NestEntityBindingExample
                 }
             };
 
-            _users = new ObservableCollection<UserViewModel>(userModels.Select(u => new UserViewModel(u)));
+            _users = new ObservableCollection<UserViewModel>(
+                _originalUsers.Select(u => new UserViewModel(u.Clone()))
+            );
             _selectedUser = _users.FirstOrDefault();
+        }
+
+        [RelayCommand]
+        private void Reset()
+        {
+            Users = new ObservableCollection<UserViewModel>(
+                _originalUsers.Select(u => new UserViewModel(u.Clone()))
+            );
+            SelectedUser = Users.FirstOrDefault();
         }
     }
 }
