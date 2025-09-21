@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NestEntityBindingExample"
+        xmlns:p="clr-namespace:NestEntityBindingExample.Properties"
         mc:Ignorable="d"
-        Title="NextEntityBindingExample" Height="550" Width="800"
+        Title="{x:Static p:Resources.MainWindow_Title}" Height="550" Width="800"
         d:DataContext="{d:DesignInstance local:MainViewModel, IsDesignTimeCreatable=True}"
         WindowStartupLocation="CenterScreen">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -15,7 +16,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <GroupBox Header="ユーザー一覧" Grid.Column="0" FontWeight="Bold">
+            <GroupBox Header="{x:Static p:Resources.UserList_Header}" Grid.Column="0" FontWeight="Bold">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -24,22 +25,22 @@
                     </Grid.RowDefinitions>
 
                     <ListBox Grid.Row="0"
-                         ItemsSource="{Binding Users}"
-                         SelectedItem="{Binding SelectedUser}"
-                         DisplayMemberPath="Name"
-                         Margin="5,5,5,0"/>
+                             ItemsSource="{Binding Users}"
+                             SelectedItem="{Binding SelectedUser}"
+                             DisplayMemberPath="Name"
+                             Margin="5,5,5,0"/>
 
                     <Button Grid.Row="1"
-                        Content="追加" 
-                        Command="{Binding AddUserCommand}" 
-                        Margin="5,5,5,0" 
-                        Padding="5"/>
+                            Content="{x:Static p:Resources.AddButton_Content}" 
+                            Command="{Binding AddUserCommand}" 
+                            Margin="5,5,5,0" 
+                            Padding="5"/>
 
                     <Button Grid.Row="2"
-                        Content="リセット" 
-                        Command="{Binding ResetCommand}" 
-                        Margin="5" 
-                        Padding="5"/>
+                            Content="{x:Static p:Resources.ResetButton_Content}" 
+                            Command="{Binding ResetCommand}" 
+                            Margin="5" 
+                            Padding="5"/>
                 </Grid>
             </GroupBox>
 
@@ -51,35 +52,35 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0">
-                    <TextBlock Text="入力フォーム" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-                    <Label Content="ID"/>
+                    <TextBlock Text="{x:Static p:Resources.InputForm_Header}" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                    <Label Content="{x:Static p:Resources.Id_Label}"/>
                     <TextBox Text="{Binding SelectedUser.Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Background="#EEEEEE"/>
-                    <Label Content="名前 (Name)" Margin="0,5,0,0"/>
+                    <Label Content="{x:Static p:Resources.Name_Label}" Margin="0,5,0,0"/>
                     <TextBox Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged}" />
-                    <Label Content="説明 (Description)" Margin="0,5,0,0"/>
+                    <Label Content="{x:Static p:Resources.Description_Label}" Margin="0,5,0,0"/>
                     <TextBox Text="{Binding SelectedUser.Description, UpdateSourceTrigger=PropertyChanged}"
                              Height="80" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
                 </StackPanel>
 
-                <GroupBox Grid.Row="1" Header="データバインディングによるリアルタイム表示" Margin="0,20,0,0" FontWeight="Bold">
+                <GroupBox Grid.Row="1" Header="{x:Static p:Resources.RealTimeDisplay_Header}" Margin="0,20,0,0" FontWeight="Bold">
                     <StackPanel Margin="10">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="ID:" FontWeight="Medium" Width="100"/>
+                            <TextBlock Text="{x:Static p:Resources.DisplayId_Label}" FontWeight="Medium" Width="100"/>
                             <TextBlock Text="{Binding SelectedUser.Id}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                            <TextBlock Text="Name:" FontWeight="Medium" Width="100"/>
+                            <TextBlock Text="{x:Static p:Resources.DisplayName_Label}" FontWeight="Medium" Width="100"/>
                             <TextBlock Text="{Binding SelectedUser.Name}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                            <TextBlock Text="Description:" FontWeight="Medium" Width="100"/>
+                            <TextBlock Text="{x:Static p:Resources.DisplayDescription_Label}" FontWeight="Medium" Width="100"/>
                             <TextBlock Text="{Binding SelectedUser.Description}" TextWrapping="Wrap"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
 
                 <Button Grid.Row="2"
-                        Content="削除"
+                        Content="{x:Static p:Resources.DeleteButton_Content}"
                         Command="{Binding DeleteCommand}"
                         CommandParameter="{Binding SelectedUser}"
                         HorizontalAlignment="Right"
